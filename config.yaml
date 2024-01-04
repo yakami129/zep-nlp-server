@@ -7,10 +7,10 @@ embeddings:
   device: cpu
   messages:
     enabled: true
-    model: all-MiniLM-L6-v2
+    model: moka-ai/m3e-base
   documents:
     enabled: true
-    model: all-MiniLM-L6-v2
+    model: moka-ai/m3e-base
     # This is the recommended, moderate-memory model for document embeddings
 #    model: multi-qa-mpnet-base-dot-v1
 nlp:
