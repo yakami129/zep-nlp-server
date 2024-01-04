@@ -30,9 +30,11 @@ COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
 RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 COPY ./models/moka-ai_m3e-base /root/.cache/torch/sentence_transformers/moka-ai_m3e-base
+
 COPY ./app /app/app
 COPY config.yaml /app
 COPY main.py /app
+COPY ./models/en_core_web_sm /app/.venv/lib/python3.11/site-packages/en_core_web_sm 
 
 WORKDIR /app
 
