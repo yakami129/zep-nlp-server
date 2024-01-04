@@ -25,25 +25,6 @@ locust = "^2.15.1"
 httpx = "^0.24.1"
 types-pyyaml = "^6.0.12.11"
 
-[[tool.poetry.dependencies.torch]]
-version = "^2.0.1"
-markers = "platform_machine == 'x86_64'"
-source = "torch"
-
-[[tool.poetry.dependencies.torch]]
-version = "^2.0.1"
-markers = "platform_machine != 'x86_64'"
-source = "PyPI"
-
-[[tool.poetry.source]]
-name = "torch"
-url = "https://download.pytorch.org/whl/cpu"
-priority = "explicit"
-
-[[tool.poetry.source]]
-name = "PyPI"
-priority = "primary"
-
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

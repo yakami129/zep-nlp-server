@@ -15,12 +15,12 @@ RUN pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple some-p
 RUN pip install poetry==1.5.1 -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
 WORKDIR /app
 
-COPY pyproject.toml poetry.lock ./
+COPY pyproject.toml ./
 RUN poetry source add --priority=default mirrors https://pypi.tuna.tsinghua.edu.cn/simple/
 RUN poetry install --without dev --no-root && rm -rf $POETRY_CACHE_DIR
 
 # Download language model. Can be changed to a different model via config or env variable
-RUN poetry run python -m spacy download ${LANGUAGE_MODEL}
+# RUN poetry run python -m spacy download ${LANGUAGE_MODEL}
 
 FROM python:3.11.3-slim-bullseye as runtime
 
@@ -28,6 +28,7 @@ ENV VIRTUAL_ENV=/app/.venv \
     PATH="/app/.venv/bin:$PATH"
 COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
+RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 COPY ./models/moka-ai_m3e-base /root/.cache/torch/sentence_transformers/moka-ai_m3e-base
 COPY ./app /app/app
 COPY config.yaml /app

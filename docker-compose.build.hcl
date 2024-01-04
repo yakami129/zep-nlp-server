@@ -15,7 +15,7 @@ target "zep-nlp-server" {
     TAG = null
   }
   dockerfile = "Dockerfile"
-  tags = ["${DISTRO}/getzep/zep-nlp-server:${TAG}"]
+  tags = ["${DISTRO}/getzep-zep-nlp-server:${TAG}"]
 }
 
 target "zep-nlp-server-release" {
