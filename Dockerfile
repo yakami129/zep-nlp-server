@@ -29,12 +29,13 @@ ENV VIRTUAL_ENV=/app/.venv \
 COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
 RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+RUN pip install "spacy-pkuseg>=0.0.27,<0.1.0" -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
 COPY ./models/moka-ai_m3e-base /root/.cache/torch/sentence_transformers/moka-ai_m3e-base
 
 COPY ./app /app/app
 COPY config.yaml /app
 COPY main.py /app
-COPY ./models/en_core_web_sm /app/.venv/lib/python3.11/site-packages/en_core_web_sm 
+COPY ./models/zh_core_web_sm /app/.venv/lib/python3.11/site-packages/zh_core_web_sm 
 
 WORKDIR /app
 
